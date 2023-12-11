@@ -1,0 +1,11 @@
+{
+    "name": "swc-plugin-transform-module-specifiers",
+    "version": "0.0.1",
+    "license": "MIT",
+    "keywords": ["swc-plugin"],
+    "main": "target/wasm32-wasi/release/swc_plugin_transform_module_specifiers.wasm",
+    "scripts": {
+        "prepublishOnly": "cargo build-wasi --release"
+    },
+    "preferUnplugged": true
+}
