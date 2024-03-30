@@ -17,18 +17,44 @@ fn transformer(_: &mut Tester) -> impl Fold {
     as_folder(TransformVisitor)
 }
 
-// DEBUG:
-const TEST_CONTENT: &str = r#"
+// TODO: control quote(single?) in transformation
+
+test_inline!(
+    SYNTAX,
+    transformer,
+    /* name */ ts2js,
+    /* input */
+    r#"
     import { v1, v2, v3 } from './file1.ts';
     import type { t1, t2, t3 } from '../file2.ts';
     import fun1 from './file3.ts';
     import externFun from '@some/lib';
 
-    fun1();
+    export * from './file5.ts';
+    export { v5, type t4 } from '../file6.ts';
+    "#,
+    /* output */
+    r#"
+    import { v1, v2, v3 } from "./file1.js";
+    import type { t1, t2, t3 } from "../file2.js";
+    import fun1 from "./file3.js";
+    import externFun from '@some/lib';
 
-    function fun2() {
-        const v4 = import('./file4.ts');
-    }
-"#;
+    export * from "./file5.js";
+    export { v5, type t4 } from "../file6.js";
+    "#
+);
 
-test_inline!(SYNTAX, transformer, debug, TEST_CONTENT, TEST_CONTENT);
+test_inline!(
+    SYNTAX,
+    transformer,
+    /* name */ ts2js_import,
+    /* input */
+    r#"
+    import { v1, v2, v3 } from './file1.ts';
+    "#,
+    /* output */
+    r#"
+    import { v1, v2, v3 } from "./file1.js";
+    "#
+);
