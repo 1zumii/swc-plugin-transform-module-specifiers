@@ -13,20 +13,14 @@ impl VisitMut for TransformVisitor {
                 let path = decl.src.value.as_str();
 
                 if need_transform(path) {
-                    let path = Path::new(decl.src.value.as_str()).with_extension("js");
-                    if let Some(transformed_path) = path.to_str() {
-                        decl.src = Box::new(Str::from(transformed_path));
-                    }
+                    decl.src = Box::new(Str::from(transform_path(decl.src.value.as_str())));
                 }
             }
             ModuleDecl::ExportAll(decl) => {
                 let path = decl.src.value.as_str();
 
                 if need_transform(path) {
-                    let path = Path::new(decl.src.value.as_str()).with_extension("js");
-                    if let Some(transformed_path) = path.to_str() {
-                        decl.src = Box::new(Str::from(transformed_path));
-                    }
+                    decl.src = Box::new(Str::from(transform_path(decl.src.value.as_str())));
                 }
             }
             ModuleDecl::ExportNamed(decl) => {
@@ -34,10 +28,7 @@ impl VisitMut for TransformVisitor {
                     let path = src.value.as_str();
 
                     if need_transform(path) {
-                        let path = Path::new(src.value.as_str()).with_extension("js");
-                        if let Some(transformed_path) = path.to_str() {
-                            decl.src = Some(Box::new(Str::from(transformed_path)));
-                        }
+                        decl.src = Some(Box::new(Str::from(transform_path(src.value.as_str()))));
                     }
                 }
             }
@@ -54,4 +45,8 @@ fn need_transform(path: &str) -> bool {
         Some(ext) => ext == "ts",
         None => false,
     }
+}
+
+fn transform_path(path: &str) -> String {
+    Path::new(path).with_extension("js").display().to_string()
 }
