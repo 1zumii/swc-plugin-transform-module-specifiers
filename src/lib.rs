@@ -1,5 +1,5 @@
 #[cfg(test)]
-mod test;
+mod tests;
 mod visitor;
 
 use swc_core::ecma::{

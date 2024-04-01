@@ -1,0 +1,13 @@
+{
+    "name": "tests",
+    "type": "module",
+    "scripts": {
+        "compile": "rm -rf ./output && swc ./src -d ./output && mv ./output/src/* ./output && rm -rf ./output/src",
+        "start": "node ./output/app.js"
+    },
+    "dependencies": {
+        "@swc/cli": "^0.3.12",
+        "@swc/core": "^1.4.11",
+        "swc_plugin_transform_module_specifiers": "../../"
+    }
+}

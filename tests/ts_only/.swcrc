@@ -1,0 +1,19 @@
+{
+    "$schema": "https://json.schemastore.org/swcrc",
+    "jsc": {
+        "parser": {
+            "syntax": "typescript",
+            "tsx": true
+        },
+        "target": "es2022",
+        "experimental": {
+            "plugins": [
+                [
+                    "swc_plugin_transform_module_specifiers",
+                    {}
+                ]
+            ]
+        }
+    },
+    "minify": false
+}
