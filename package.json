@@ -4,6 +4,9 @@
     "license": "MIT",
     "keywords": ["swc-plugin"],
     "main": "target/wasm32-wasi/release/swc_plugin_transform_module_specifiers.wasm",
+    "files": [
+        "target/wasm32-wasi/release/swc_plugin_transform_module_specifiers.wasm"
+    ],
     "scripts": {
         "prepublishOnly": "cargo build-wasi --release"
     },
