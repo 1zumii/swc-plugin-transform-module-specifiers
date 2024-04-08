@@ -1,6 +1,5 @@
 [package]
 name = "swc_plugin_transform_module_specifiers"
-version = "0.0.1"
 edition = "2021"
 
 [lib]

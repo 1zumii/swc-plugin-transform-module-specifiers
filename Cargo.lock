@@ -1479,7 +1479,7 @@ dependencies = [
 
 [[package]]
 name = "swc_plugin_transform_module_specifiers"
-version = "0.0.1"
+version = "0.0.0"
 dependencies = [
  "serde",
  "swc_core",
