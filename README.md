@@ -31,6 +31,14 @@ npm install -D swc-plugin-transform-module-specifiers
 }
 ```
 
+by default, only transform `ts` to `js`. declare extension map in plugin's config to custom transform behavior
+```json
+{
+    "mts": "mjs",
+    "tsx": "jsx"
+}
+```
+
 ## 🤔 Why this plugin? or what problem it solved
 
 if you are developing in a Node.js + TypeScript + ESM project, and transpile codes by tsc. you might come across: 

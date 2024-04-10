@@ -2,6 +2,7 @@
     "name": "tests",
     "type": "module",
     "scripts": {
+        "buildPlugin":"cd ../../ && npm run build",
         "compile": "rm -rf ./output && swc ./src -d ./output && mv ./output/src/* ./output && rm -rf ./output/src",
         "start": "node ./output/app.js"
     },

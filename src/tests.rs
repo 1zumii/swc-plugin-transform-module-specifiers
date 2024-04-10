@@ -1,4 +1,6 @@
-use crate::visitor::TransformVisitor;
+use std::collections::HashMap;
+
+use crate::{config::PluginConfig, visitor::TransformVisitor};
 use swc_core::ecma::{
     parser::{Syntax, TsConfig},
     transforms::testing::{test, test_inline, Tester},
@@ -14,7 +16,7 @@ const SYNTAX: Syntax = Syntax::Typescript(TsConfig {
 });
 
 fn transformer(_: &mut Tester) -> impl Fold {
-    as_folder(TransformVisitor)
+    as_folder(TransformVisitor::default())
 }
 
 // TODO: control quote(single?) in transformation
@@ -56,5 +58,26 @@ test_inline!(
     /* output */
     r#"
     import { v1, v2, v3 } from "./file1.js";
+    "#
+);
+
+test_inline!(
+    SYNTAX,
+    |_| as_folder(TransformVisitor {
+        config: PluginConfig::new(HashMap::from([
+            (String::from("ts"), String::from("js")),
+            (String::from("mts"), String::from("mjs"))
+        ]))
+    }),
+    /* name */ default_cjs_with_esm_import,
+    /* input */
+    r#"
+    import { v1, v2, v3 } from './file1.ts';
+    import { v4, v5, v6 } from './file2.mts';
+    "#,
+    /* output */
+    r#"
+    import { v1, v2, v3 } from "./file1.js";
+    import { v4, v5, v6 } from "./file2.mjs";
     "#
 );
