@@ -24,7 +24,7 @@ npm install -D swc-plugin-transform-module-specifiers
 {
     "plugins": [
         [
-            "swc_plugin_transform_module_specifiers",
+            "swc-plugin-transform-module-specifiers",
             {}
         ]
     ]
