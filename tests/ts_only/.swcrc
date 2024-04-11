@@ -9,7 +9,7 @@
         "experimental": {
             "plugins": [
                 [
-                    "swc_plugin_transform_module_specifiers",
+                    "swc-plugin-transform-module-specifiers",
                     {}
                 ]
             ]
